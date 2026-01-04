@@ -7,12 +7,22 @@
     {{ with .Params.level }}<div class="pill {{ if in . "🟢" }}green{{ else if in . "🟡" }}yellow{{ else }}red{{ end }}">{{ . }}</div>{{ end }}
     <div class="content">{{ .Content }}</div>
     <hr style="border: 1px solid var(--border); margin: 24px 0;" />
+    {{ $pages := (where .Site.RegularPages "Section" "lessons").ByWeight }}
+    {{ $scratch := newScratch }}
+    {{ range $i, $p := $pages }}
+      {{ if eq $p.RelPermalink .RelPermalink }}
+        {{ $scratch.Set "idx" $i }}
+      {{ end }}
+    {{ end }}
+    {{ $idx := $scratch.Get "idx" }}
+    {{ $prev := (cond (and (ne $idx nil) (gt $idx 0)) (index $pages (sub $idx 1)) nil) }}
+    {{ $next := (cond (and (ne $idx nil) (lt (add $idx 1) (len $pages))) (index $pages (add $idx 1)) nil) }}
     <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
       <div>
-        {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+        {{ with $prev }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
       </div>
       <div style="margin-left: auto;">
-        {{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+        {{ with $next }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
       </div>
     </div>
   </article>

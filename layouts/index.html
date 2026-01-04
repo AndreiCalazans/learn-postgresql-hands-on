@@ -22,11 +22,11 @@
       </div>
       <div class="grid" style="margin-top: 12px;">
         {{ range first 4 $levelPages }}
-          <article class="card" style="box-shadow:none; border-color: var(--border);">
+          <a class="card card-link" style="box-shadow:none; border-color: var(--border);" href="{{ .RelPermalink }}">
             <h3 style="margin-top: 0;">{{ .Title }}</h3>
             <p style="color: var(--muted);">{{ with .Params.summary }}{{ . }}{{ else }}Hands-on PostgreSQL lesson.{{ end }}</p>
-            <a href="{{ .RelPermalink }}">Open lesson →</a>
-          </article>
+            <span class="pill muted">Open lesson →</span>
+          </a>
         {{ end }}
       </div>
     </section>
