@@ -14,13 +14,14 @@
   {{ $levels := slice (dict "label" "Level 1 — Just Use Postgres" "emoji" "🟢" ) (dict "label" "Level 2 — PostgreSQL Mistakes" "emoji" "🟡") (dict "label" "Level 3 — Postgres Internals" "emoji" "🔴") }}
   {{ range $levels }}
     {{ $levelLabel := printf "%s %s" .emoji .label }}
+    {{ $levelPages := (where $.Site.RegularPages "Params.level" $levelLabel).ByWeight }}
     <section class="card" style="margin-bottom: 24px;">
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
         <h2 style="margin: 0;">{{ .emoji }} {{ .label }}</h2>
         <a href="/lessons/" style="color: var(--muted);">All lessons →</a>
       </div>
       <div class="grid" style="margin-top: 12px;">
-        {{ range first 4 (where $.Site.RegularPages "Params.level" $levelLabel | sort "Weight") }}
+        {{ range first 4 $levelPages }}
           <article class="card" style="box-shadow:none; border-color: var(--border);">
             <h3 style="margin-top: 0;">{{ .Title }}</h3>
             <p style="color: var(--muted);">{{ with .Params.summary }}{{ . }}{{ else }}Hands-on PostgreSQL lesson.{{ end }}</p>
