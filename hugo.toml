@@ -1,10 +1,11 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "PostgreSQL in 36 Lessons"
-theme = ""
 enableRobotsTXT = true
-paginate = 50
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomy"]
+
+[pagination]
+  pagerSize = 50
 
 [params]
   description = "36 hands-on PostgreSQL CLI challenges inspired by production lessons."

@@ -13,7 +13,7 @@ This repository hosts a Hugo static site with 36 hands-on PostgreSQL CLI challen
 
 ## Local development
 
-1. Install **Hugo Extended** (v0.139.0 or newer). On macOS: `brew install hugo`.
+1. Install **Hugo Extended** (v0.154.2 or newer). On macOS: `brew install hugo`.
 2. From the repo root, run `npm run dev` to start a local server.
 3. Run `npm run build` to produce the static site in `public/`.
 
