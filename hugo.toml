@@ -1,0 +1,27 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "PostgreSQL in 36 Lessons"
+theme = ""
+enableRobotsTXT = true
+paginate = 50
+disableKinds = ["taxonomy", "taxonomyTerm"]
+
+[params]
+  description = "36 hands-on PostgreSQL CLI challenges inspired by production lessons."
+  author = "PostgreSQL in 36 Lessons"
+
+[permalinks]
+  lessons = "/lessons/:slug/"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Lessons"
+    url = "/lessons/"
+    weight = 2
+
+[markup.goldmark.renderer]
+  unsafe = true

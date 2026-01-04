@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article class="card">
+    <p style="margin: 0 0 8px; color: var(--muted);">
+      <a href="/">Home</a> · <a href="/lessons/">Lessons</a>
+    </p>
+    <h1 style="margin-top: 0;">{{ .Title }}</h1>
+    {{ with .Params.level }}<div class="pill {{ if in . "🟢" }}green{{ else if in . "🟡" }}yellow{{ else }}red{{ end }}">{{ . }}</div>{{ end }}
+    <div class="content">{{ .Content }}</div>
+    <hr style="border: 1px solid var(--border); margin: 24px 0;" />
+    <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+      <div>
+        {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+      </div>
+      <div style="margin-left: auto;">
+        {{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+      </div>
+    </div>
+  </article>
+{{ end }}

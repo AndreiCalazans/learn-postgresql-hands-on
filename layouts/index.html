@@ -1,0 +1,33 @@
+{{ define "main" }}
+  <section class="card" style="margin-bottom: 24px;">
+    <p class="pill green" style="margin:0 0 12px 0; display:inline-flex;">Hands-on • CLI only</p>
+    <h1 style="margin-top: 0;">PostgreSQL in 36 Lessons</h1>
+    <p style="color: var(--muted); max-width: 780px;">A Hugo-powered curriculum you can ship to Vercel. Every lesson is a five-minute, terminal-first experiment designed to help engineers internalize PostgreSQL’s platform strengths, common pitfalls, and observable internals.</p>
+    <ul>
+      <li>Built for macOS + <code>psql</code> only—no extensions, no external dependencies.</li>
+      <li>36 independent tasks grouped into three levels: platform basics, production mistakes, and engine internals.</li>
+      <li>Each page includes setup SQL, a concrete challenge, progressive hints, observations to verify, and a production takeaway.</li>
+    </ul>
+    <p><strong>Ready?</strong> Jump straight to the lessons below.</p>
+  </section>
+
+  {{ $levels := slice (dict "label" "Level 1 — Just Use Postgres" "emoji" "🟢" ) (dict "label" "Level 2 — PostgreSQL Mistakes" "emoji" "🟡") (dict "label" "Level 3 — Postgres Internals" "emoji" "🔴") }}
+  {{ range $levels }}
+    {{ $levelLabel := printf "%s %s" .emoji .label }}
+    <section class="card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+        <h2 style="margin: 0;">{{ .emoji }} {{ .label }}</h2>
+        <a href="/lessons/" style="color: var(--muted);">All lessons →</a>
+      </div>
+      <div class="grid" style="margin-top: 12px;">
+        {{ range first 4 (where $.Site.RegularPages "Params.level" $levelLabel | sort "Weight") }}
+          <article class="card" style="box-shadow:none; border-color: var(--border);">
+            <h3 style="margin-top: 0;">{{ .Title }}</h3>
+            <p style="color: var(--muted);">{{ with .Params.summary }}{{ . }}{{ else }}Hands-on PostgreSQL lesson.{{ end }}</p>
+            <a href="{{ .RelPermalink }}">Open lesson →</a>
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

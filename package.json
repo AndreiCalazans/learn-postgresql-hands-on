@@ -1,0 +1,13 @@
+{
+  "name": "postgresql-36-lessons",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "hugo server -D --minify",
+    "build": "hugo --minify",
+    "vercel-build": "hugo --minify"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
