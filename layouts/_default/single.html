@@ -8,9 +8,10 @@
     <div class="content">{{ .Content }}</div>
     <hr style="border: 1px solid var(--border); margin: 24px 0;" />
     {{ $pages := (where .Site.RegularPages "Section" "lessons").ByWeight }}
+    {{ $current := . }}
     {{ $scratch := newScratch }}
     {{ range $i, $p := $pages }}
-      {{ if eq $p.RelPermalink .RelPermalink }}
+      {{ if eq $p.RelPermalink $current.RelPermalink }}
         {{ $scratch.Set "idx" $i }}
       {{ end }}
     {{ end }}
