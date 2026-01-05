@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <section class="card" style="margin-bottom: 24px;">
+    <h1>{{ .Title }}</h1>
+    <p style="color: var(--muted); max-width: 800px;">{{ .Site.Params.description }}</p>
+    <div class="content">{{ .Content }}</div>
+  </section>
+  {{ if .Pages }}
+    <div class="grid">
+      {{ range .Pages.ByWeight }}
+        <a class="card card-link" href="{{ .RelPermalink }}">
+          <h2 style="margin-top: 0;">{{ .Title }}</h2>
+          {{ with .Params.level }}<div class="pill {{ if in . "🟢" }}green{{ else if in . "🟡" }}yellow{{ else }}red{{ end }}">{{ . }}</div>{{ end }}
+          {{ with .Params.summary }}<p style="color: var(--muted);">{{ . }}</p>{{ end }}
+          <span class="pill muted">Open lesson →</span>
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}
